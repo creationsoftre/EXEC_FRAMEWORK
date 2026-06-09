@@ -1,0 +1,309 @@
+:root {
+  --lb-bg: rgba(0, 0, 0, 0.6);
+  --lb-card: linear-gradient(160deg, rgba(14, 14, 16, 0.96), rgba(20, 21, 23, 0.88));
+  --lb-border: #2A2C30;
+  --lb-text: #FFFFFF;
+  --lb-muted: #A8A8A8;
+  --lb-accent: #39FF14;
+  --lb-accent-soft: rgba(57, 255, 20, 0.15);
+  --lb-gold: #66FF33;
+  --lb-shadow: 0 24px 46px rgba(0, 0, 0, 0.7), 0 10px 24px rgba(0, 0, 0, 0.45);
+  --lb-stroke-strong: rgba(57, 255, 20, 0.35);
+}
+
+.lb-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+  pointer-events: none;
+}
+
+.lb-overlay.hidden {
+  display: none !important;
+}
+
+.lb-overlay:not(.hidden) {
+  display: flex;
+  pointer-events: auto;
+}
+
+.lb-backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--lb-bg);
+  backdrop-filter: blur(10px);
+}
+
+.lb-container {
+  position: relative;
+  width: clamp(380px, 78vw, 1120px);
+  max-height: min(90vh, 760px);
+  padding: clamp(12px, 1.8vw, 24px);
+  transform: scale(var(--leaderboard-scale));
+  transform-origin: center center;
+}
+
+.lb-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 1.8vw, 22px);
+  background: var(--lb-card);
+  border: 1px solid var(--lb-border);
+  border-radius: 22px;
+  box-shadow: var(--lb-shadow);
+  padding: clamp(22px, 2.4vw, 28px);
+  color: var(--lb-text);
+}
+
+.lb-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(12px, 1.2vw, 16px);
+  flex-wrap: wrap;
+}
+
+.lb-title-stack {
+  display: grid;
+  gap: 6px;
+}
+
+.lb-title {
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 700;
+  letter-spacing: 0.55px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
+}
+
+.lb-updated {
+  font-size: clamp(12px, 1vw, 14px);
+  color: var(--lb-muted);
+}
+
+.lb-close {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--lb-border);
+  color: var(--lb-text);
+  font-size: clamp(18px, 1.6vw, 24px);
+  width: clamp(34px, 2.6vw, 42px);
+  height: clamp(34px, 2.6vw, 42px);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.lb-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--lb-stroke-strong);
+}
+
+.lb-body {
+  flex: 1;
+  display: flex;
+  gap: clamp(12px, 2vw, 26px);
+  min-height: clamp(220px, 55vh, 520px);
+}
+
+.lb-nav {
+  width: clamp(150px, 16vw, 260px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.2vw, 14px);
+}
+
+.lb-nav-item {
+  border: 1px solid var(--lb-border);
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: clamp(12px, 1.4vw, 18px);
+  display: grid;
+  gap: 6px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.45), 0 8px 18px rgba(0, 0, 0, 0.45);
+}
+
+.lb-nav-item strong {
+  font-size: clamp(14px, 1.3vw, 16px);
+  font-weight: 600;
+  color: var(--lb-text);
+}
+
+.lb-nav-item span {
+  font-size: clamp(12px, 0.95vw, 13px);
+  color: var(--lb-muted);
+}
+
+.lb-nav-item.active {
+  border-color: var(--lb-accent);
+  box-shadow: 0 0 0 1px var(--lb-accent-soft), 0 10px 20px rgba(0, 0, 0, 0.55);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.lb-content {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.4vw, 18px);
+}
+
+.lb-mode-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lb-mode-title {
+  font-size: clamp(18px, 1.7vw, 22px);
+  font-weight: 700;
+}
+
+.lb-mode-meta {
+  font-size: clamp(12px, 1vw, 13px);
+  color: var(--lb-muted);
+}
+
+.lb-table {
+  flex: 1;
+  border: 1px solid var(--lb-border);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  overflow: auto;
+  min-height: 0;
+  max-width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.lb-table::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.lb-table::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.lb-table::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+}
+
+.lb-table::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.lb-grid {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(13px, 1.1vw, 15px);
+  color: var(--lb-text);
+}
+
+.lb-grid thead {
+  background: rgba(255, 255, 255, 0.08);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.lb-grid th,
+.lb-grid td {
+  padding: clamp(10px, 1.2vw, 16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.lb-grid tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.lb-grid tbody tr.me {
+  background: rgba(255, 255, 255, 0.12);
+  border-left: 2px solid var(--lb-accent);
+}
+
+.lb-empty {
+  padding: clamp(24px, 3vw, 36px);
+  text-align: center;
+  font-size: clamp(14px, 1.2vw, 16px);
+  color: var(--lb-muted);
+}
+
+.lb-awards {
+  display: grid;
+  gap: clamp(12px, 1.5vw, 18px);
+}
+
+.lb-awards.hidden {
+  display: none !important;
+}
+
+.lb-award-card {
+  border: 1px solid var(--lb-border);
+  border-radius: 18px;
+  padding: clamp(16px, 1.8vw, 22px);
+  background: rgba(255, 255, 255, 0.06);
+  display: grid;
+  gap: clamp(8px, 1vw, 12px);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.lb-award-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: clamp(8px, 1vw, 12px);
+}
+
+.lb-award-title {
+  font-size: clamp(16px, 1.4vw, 18px);
+  font-weight: 600;
+}
+
+.lb-award-captured {
+  font-size: clamp(12px, 1vw, 13px);
+  color: var(--lb-muted);
+}
+
+.lb-award-desc {
+  font-size: clamp(12px, 1vw, 13px);
+  color: var(--lb-muted);
+}
+
+.lb-award-entries {
+  display: grid;
+  gap: 8px;
+}
+
+.lb-award-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: clamp(10px, 1.1vw, 14px) clamp(14px, 1.4vw, 18px);
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.lb-award-entry .value {
+  font-weight: 700;
+  color: var(--lb-accent);
+}
+
+.lb-footer {
+  text-align: right;
+  font-size: clamp(12px, 1vw, 13px);
+  color: var(--lb-muted);
+}

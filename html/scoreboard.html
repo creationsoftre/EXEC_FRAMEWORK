@@ -1,0 +1,130 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>EXEC Scoreboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>">
+  <link rel="stylesheet" href="scoreboard.css" />
+  <link rel="stylesheet" href="leaderboard.css" />
+</head>
+<body>
+  <div class="scoreboard-shell">
+    <div id="scoreboard" class="scoreboard hidden">
+      <div class="card">
+        <div class="card-header">
+          <div class="titles">
+            <span id="modeLabel" class="mode">-</span>
+            <span id="locationLabel" class="location">-</span>
+          </div>
+          <span id="statusBadge" class="badge badge-idle">Waiting</span>
+        </div>
+
+        <div class="meta" id="metaSection">
+          <div class="metric">
+            <label>Bracket</label>
+            <span id="bracketLabel">-</span>
+          </div>
+          <div class="metric">
+            <label>Players</label>
+            <span id="playersValue">0/0</span>
+          </div>
+          <div class="metric" id="countdownMetric">
+            <label>Countdown</label>
+            <span id="countdownValue">--</span>
+          </div>
+          <div class="metric">
+            <label>First To</label>
+            <span id="firstToValue">0</span>
+          </div>
+          <div class="metric">
+            <label>Your Kills</label>
+            <span id="killsValue">0</span>
+          </div>
+          <div class="metric" id="hardcoreMetric">
+            <label>Hardcore</label>
+            <span id="hardcoreValue">Off</span>
+          </div>
+        </div>
+
+        <div class="leaderboard" id="leaderboardSection">
+          <div class="leaderboard-header" id="leaderboardHeader">
+            <span class="col col-rank">#</span>
+            <span class="col col-name">Player</span>
+            <span class="col col-kills">Kills</span>
+          </div>
+          <div id="leaderboardRows" class="leaderboard-rows"></div>
+          <div id="leaderboardEmpty" class="leaderboard-empty hidden">No kills yet.</div>
+        </div>
+
+        <div id="winnerBanner" class="winner hidden"></div>
+      </div>
+    </div>
+
+    <div id="scoreboardFooter" class="scoreboard-footer hidden">Press G to toggle</div>
+  </div>
+  <div id="goToast" class="go-toast hidden">GO!</div>
+
+  <div id="deathPrompt" class="death-prompt hidden">
+    <div class="death-card">
+      <span id="deathTitle" class="death-title">You are down</span>
+      <span class="death-sub">
+        <span id="deathSubPrefix">Press</span>
+        <span id="deathKey" class="death-key">E</span>
+        <span id="deathSubSuffix">to revive</span>
+      </span>
+    </div>
+  </div>
+
+  <div id="passiveIndicator" class="passive-indicator hidden">
+    <div class="passive-chip">
+      <span class="passive-dot"></span>
+      <div class="passive-text">
+        <span class="passive-title">Passive Mode</span>
+        <span id="passiveSubtext" class="passive-sub">Combat disabled</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="hubHelp" class="hub-help hidden">
+    <div class="hub-help-card">
+      <div id="hubHelpTitle" class="hub-help-title">Hub Controls</div>
+      <div id="hubHelpRows" class="hub-help-rows"></div>
+    </div>
+  </div>
+
+  <div id="leaderboardOverlay" class="lb-overlay hidden">
+    <div class="lb-backdrop"></div>
+    <div class="lb-container">
+      <div class="lb-card">
+        <div class="lb-card-header">
+          <div class="lb-title-stack">
+            <span class="lb-title">EXEC Leaderboards</span>
+            <span id="lbUpdated" class="lb-updated">Updated: --</span>
+          </div>
+          <button id="lbClose" class="lb-close" type="button" aria-label="Close">×</button>
+        </div>
+        <div class="lb-body">
+          <aside id="lbNav" class="lb-nav"></aside>
+          <section class="lb-content">
+            <header class="lb-mode-header">
+              <span id="lbModeTitle" class="lb-mode-title">Select a category</span>
+              <span id="lbModeMeta" class="lb-mode-meta"></span>
+            </header>
+            <div id="lbTable" class="lb-table"></div>
+            <div id="lbAwards" class="lb-awards hidden"></div>
+          </section>
+        </div>
+        <footer class="lb-footer">
+          <span>Press L or click close to exit</span>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <script src="scoreboard.js"></script>
+  <script src="leaderboard.js"></script>
+</body>
+</html>
+
+
